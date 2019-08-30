@@ -8,7 +8,8 @@ USER root
 RUN buildDeps="sudo make gcc g++ libc-dev" \
  && apt-get update \
  && apt-get install -y --no-install-recommends $buildDeps \
- && sudo gem install fluent-plugin-elasticsearch \
+ && sudo gem install fluent-plugin-azure-loganalytics \
+ && sudo gem install fluent-plugin-docker  \
  && sudo gem sources --clear-all \
  && SUDO_FORCE_REMOVE=yes \
     apt-get purge -y --auto-remove \
@@ -16,8 +17,10 @@ RUN buildDeps="sudo make gcc g++ libc-dev" \
                   $buildDeps \
  && rm -rf /var/lib/apt/lists/* \
  && rm -rf /tmp/* /var/tmp/* /usr/lib/ruby/gems/*/cache/*.gem
+RUN usermod -aG root fluent
 
 COPY fluent.conf /fluentd/etc/
 COPY entrypoint.sh /bin/
+
 
 USER fluent
