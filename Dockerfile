@@ -1,17 +1,8 @@
-FROM fluent/fluentd:v1.7-debian-1
+FROM fluent/fluentd:v1.3-debian
 
-# Use root account to use apt
-USER root
+RUN  /usr/local/bin/fluent-gem install gelf  \
+  &&  /usr/local/bin/fluent-gem install fluent-plugin-azure-loganalytics
+  
+WORKDIR /fluentd
 
-# below RUN includes plugin as examples elasticsearch is not required
-# you may customize including plugins as you wish
-RUN buildDeps="sudo make gcc g++ libc-dev" \
- && apt-get update \
- && apt-get install -y --no-install-recommends $buildDeps \
- && sudo gem install fluent-plugin-azure-loganalytics \
- && sudo gem install fluent-plugin-docker  
- 
-RUN usermod -a -G root fluent 
-#RUN useradd -r -g root fluent
-
-USER fluent
+RUN usermod -a -G root fluent
