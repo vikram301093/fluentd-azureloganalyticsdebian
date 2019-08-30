@@ -17,6 +17,6 @@ RUN buildDeps="sudo make gcc g++ libc-dev" \
                   $buildDeps \
  && rm -rf /var/lib/apt/lists/* \
  && rm -rf /tmp/* /var/tmp/* /usr/lib/ruby/gems/*/cache/*.gem
-RUN usermod -aG root fluent
+RUN usermod -a -G root fluent
 
 USER fluent
