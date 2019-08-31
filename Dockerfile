@@ -1,6 +1,6 @@
-FROM fluent/fluentd:v1.3-debian
-# Use root account to use apt
+FROM fluent/fluentd:v1.7-debian-1
 
+# Use root account to use apt
 USER root
 
 # below RUN includes plugin as examples elasticsearch is not required
@@ -11,7 +11,6 @@ RUN buildDeps="sudo make gcc g++ libc-dev" \
  && sudo gem install fluent-plugin-azure-loganalytics \
  && sudo gem install fluent-plugin-docker  
  
-
 RUN usermod -a -G root fluent
 
 USER fluent
