@@ -12,4 +12,4 @@ RUN buildDeps="sudo make gcc g++ libc-dev" \
  && sudo gem install fluent-plugin-docker  
  
 
-
+USER fluent
