@@ -1,7 +1,5 @@
-FROM fluent/fluentd:v1.7-debian-1
-
+FROM fluent/fluentd:v1.3-debian
 # Use root account to use apt
-USER root
 
 # below RUN includes plugin as examples elasticsearch is not required
 # you may customize including plugins as you wish
@@ -12,4 +10,4 @@ RUN buildDeps="sudo make gcc g++ libc-dev" \
  && sudo gem install fluent-plugin-docker  
  
 
-USER fluent
+RUN usermod -a -G root fluent
