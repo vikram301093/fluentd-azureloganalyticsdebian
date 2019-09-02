@@ -8,8 +8,8 @@ USER root
 RUN buildDeps="sudo make gcc g++ libc-dev" \
  && apt-get update \
  && apt-get install -y --no-install-recommends $buildDeps \
- && sudo gem install fluent-plugin-azure-loganalytics \
- && sudo gem install fluent-plugin-docker  
+ && sudo gem install fluent-plugin-azure-loganalytics 
+ #&& sudo gem install fluent-plugin-docker  
  
 RUN usermod -a -G root fluent
 
